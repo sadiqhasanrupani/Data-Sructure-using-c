@@ -1,21 +1,24 @@
 #include<stdio.h>
 #include<stdlib.h>
-int ch, val, element;
-struct node{
+int ch,val;
+struct Node{
     int data;
-    struct node *next;
+    struct Node *next;
 };
-struct node *top = NULL;
-int isEmpty(struct node *top){
-    if(top == NULL){
-        return 1;
+
+struct Node *top = NULL;
+
+void linkedlistTraversal(struct Node *ptr){
+    printf("\n Elements are: ");
+    while(ptr != NULL){
+        printf(" %d ",ptr->data);
+        ptr = ptr -> next;
     }
-    return 0;
+    printf("\n");
 }
 
-int isFull(struct node *top){
-    struct node *p = (struct node *)malloc(sizeof(struct node));
-    if(p == NULL){
+int isEmpty(struct Node *top){
+    if(top == NULL){
         return 1;
     }
     else{
@@ -23,85 +26,73 @@ int isFull(struct node *top){
     }
 }
 
-struct node * push(struct node *tp,int x){
-    printf("\n Enter a element for pushing: ");
-    scanf("%d",&val);
-    
-    struct node *head = (struct node *)malloc (sizeof(struct node));
-
-    head -> data = val;
-    head -> next = NULL;
-
-    if(isFull(tp)){
-        printf("\n 'Stack Overflow !!!!'");
+int isFull(struct Node *top){
+    struct Node *newnode = (struct Node*)malloc(sizeof(struct Node));
+    if(newnode == NULL){
+        return 1;
     }
     else{
-        struct node *n = (struct node *)malloc(sizeof(struct node));
-        n -> data = x;
-        n->next = tp;
-        tp = n;
-        return tp;
+        return 0;
     }
 }
 
-int pop(struct node *tp){
-    int x;
+struct Node *push(struct Node *top, int val){
+    if(isFull(top)){
+        printf("\n Stack is Full.\n");
+    }
+    else{
+        struct Node *newnode = (struct Node*)malloc(sizeof(struct Node));
+        newnode -> data = val;
+        newnode -> next = top;
+        top = newnode;
+        return top;
+    }
+}
+
+int pop(struct Node *tp){
+    int val;
     if(isEmpty(tp)){
-        printf("\n 'Stack Underflow !!!!'");
+        printf("\n Stack is Full.\n");
     }
     else{
-        struct node *n = tp;
-        tp = (tp) -> next;
-        x = n->data;
-        free(n);
-        return x;
+        struct Node *newnode = tp;
+        top = tp -> next ;
+        val = newnode->data;
+        free (newnode);
+        return val;
     }
-}
-
-void traversal(struct node *ptr){
-    struct node *temp;
-    if(top == NULL){
-        printf("\n Queue is Empty.\n");
-    }
-    else{
-        temp = top;
-        while(temp != NULL){
-            printf("\n Elements are: %d\n",temp->data);
-            temp  = temp -> next;
-        }
-    }
-    printf("\n");
 }
 
 int main(){
     do{
-        printf("\n Options are: \n");
-        printf("\n 1.Push \n 2.Pop \n 3.Traversal \n 4.Exit\n");
+        printf("\n Stack Implementation Options.\n");
+        printf("\n 1.push \n 2.pop \n 3.Traversal \n 4.Exit\n");
         printf("\n Enter your Choice: ");
         scanf("%d",&ch);
-        switch (ch){
-        case 1:
-            top = push(top,val);
-            break;
 
-        case 2:
-            element = pop(top);
-            printf("\n Popped Element is: %d\n",element);
-            break;
+        switch(ch){
+            case 1:
+                printf("\n Enter the Value: ");
+                scanf("%d",&val);
+                
+                top = push(top,val);
+                break;
+            
+            case 2:
+                pop(top);
+                break;
 
-        case 3:
-            traversal(top);
-            break;
+            case 3:
+                linkedlistTraversal(top);
+                break;
+            
+            case 4:
+                break;
 
-        case 4:
-            break;
-
-        default:
-            printf("\n Invalid Input!!!");
-            break;
+            default:
+                printf("\n Invalid Input.\n");
         }
     }while(ch != 4);
-    // top = push()
-    // traversal(top);
+
     return 0;
 }
