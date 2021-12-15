@@ -14,9 +14,9 @@ struct Node *rear  = NULL;
 
 int isFull(){                           //Checking the queue is Empty or not
 
-    struct Node *newnode = (struct Node*)malloc(sizeof(struct Node));   //make a newnode.
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));   //make a newnode.
 
-    if(newnode == NULL){    //check the newnode is at null
+    if(newNode == NULL){    //check the newnode is at null
         return 1;           //statement true Return 1.
     }
     else{
@@ -34,30 +34,30 @@ int isEmpty(struct Node *front){        //Checking the queue is Empty or not
     }
 }
 
-void endqueue(int val){
+void endQueue(int val){     //This function is used to insert a value in queue.
     
-    struct Node *newnode = (struct Node*)malloc(sizeof(struct Node));   //making a newnode with malloc funciton.
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));   //making a newnode with malloc funciton.
 
     if(isFull()){   //checking if the queue is full or not.
         printf("\n Queue is Full.\n");
     }
     else{
-        newnode -> data = val;  //newnode data will stores the value of the integer val.
-        newnode -> next = NULL; //after that the newnode of next will be NULL.
+        newNode -> data = val;  //newnode data will stores the value of the integer val.
+        newNode -> next = NULL; //after that the newnode of next will be NULL.
 
         if(front == NULL){      //if front is equal to NULL.
-            front = rear = newnode; //then front and rear value will be the value of newnode.
+            front = rear = newNode; //then front and rear value will be the value of newnode.
         }
         else{
-            rear->next = newnode;   //rear of next value will be the value of newnode.
-            rear = newnode;         // newnode value will be store on the rear.
+            rear->next = newNode;   //rear of next value will be the value of newnode.
+            rear = newNode;         // newnode value will be store on the rear.
         }
     }
 }
 
 int deleteQueue(){//making a delete function which requires the front and rear.
     
-    struct Node *newnode = front;   //newnode is equal to front.
+    struct Node *newNode = front;   //newnode is equal to front.
     
     int val = -1;   //initiallized the val by -1.
     
@@ -66,8 +66,8 @@ int deleteQueue(){//making a delete function which requires the front and rear.
     }
     else{
         front = front -> next;  //front of next value will be store in front.
-        val = newnode -> data;  //value of newnode -> next will be store in val.
-        free(newnode);          // freeing the newnode. but we are freeing the value of front bcz the newnode = front.
+        val = newNode -> data;  //value of newnode -> next will be store in val.
+        free(newNode);          // freeing the newnode. but we are freeing the value of front bcz the newnode = front.
     }
     return val;     // returning the val.
 }
@@ -95,7 +95,7 @@ int main(){
                 printf("\n Enter a Value: ");
                 scanf("%d",&val);
 
-                endqueue(val);
+                endQueue(val);
                 break;
 
             case 2:
