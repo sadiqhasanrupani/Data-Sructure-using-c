@@ -58,26 +58,19 @@ void insertAtEnd(int val){
 }
 
 void insertAfter(int val, int element){
-    struct node *newNode = head;
-    
-    while(newNode != NULL){
-        newNode = newNode -> next;
+    struct node *temp = head;
+    struct node *newNode = (struct node *)malloc(sizeof(struct node));
 
-        if(newNode -> data == element){
-            if(newNode -> next == NULL ){
-                insertAtEnd(val);
-            }
-            else if (newNode ){
-                struct node *tempNode = (struct node *)malloc(sizeof(struct node));
-                tempNode -> data = val;
-                tempNode-> next = newNode -> next;
-                newNode-> next = tempNode;
-            }
+    while(temp != NULL){
+        if(temp -> data == element){
+            newNode -> data = val;
+            newNode -> next = temp -> next;
+            temp -> next = newNode;
             break;
         }
+        temp = temp -> next;
     }
-
-    if(head == NULL){
+    if(temp == NULL){
         printf("\n Element Not Found.\n");
     }
     else{
