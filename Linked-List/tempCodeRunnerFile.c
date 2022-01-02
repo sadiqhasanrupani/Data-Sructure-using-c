@@ -1,2 +1,5 @@
-    struct node *front = NULL;
-    struct node *rear = NULL;
+void deleteFromEnd(){
+//     if(isEmpty()){
+
+//     }
+// }

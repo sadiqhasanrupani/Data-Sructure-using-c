@@ -74,9 +74,111 @@ void insertAfter(int val, int element){
         printf("\n Element Not Found.\n");
     }
     else{
-
     printf("\n Element Inserted after a element: ");
     display();
+    printf("\n");
+    }
+}
+
+int isEmpty(){
+    if(head == NULL){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int deleteFromFront(){
+    if(isEmpty()){
+        printf("\n General list is Empty. \n");
+    }
+    else{
+        struct node *tempNode = head;
+        head = head -> next;
+        printf("\n Deleted Element is: %d \n",tempNode->data);
+        tempNode -> next = NULL;
+        free(tempNode);
+    }
+    printf("\n Element after deleting from front: ");
+    display();
+    printf("\n");
+}
+
+int deleteFromEnd(){
+    if(isEmpty()){
+        printf("\n General List is Empty. \n");
+    }
+    else if(head -> next == NULL){
+        printf("\n Deleted Element is %d. \n",head -> data);
+        free(head);
+        head = NULL;
+    }
+    else{
+        struct node *newNode = head;
+        struct node *temp = head -> next;
+
+        while(temp -> next != NULL){
+            newNode = newNode -> next;
+            temp = temp -> next;
+        }
+        newNode -> next = NULL;
+        printf("\n Deleted Element is: %d. \n",temp -> data);
+        free(temp);
+    }
+    printf("\n Element after deleting from End: ");
+    display();
+    printf("\n");
+}
+
+int deleteAfter(int element){
+    struct node *newNode = head;
+    struct node *tempNode = head -> next;
+    if(isEmpty()){
+        printf("\n General Linked list is Empty. \n");
+    }
+    else if(newNode -> data == element){
+        deleteFromEnd();
+    }
+    else{
+        while(tempNode -> data != element && tempNode -> next != NULL){
+            newNode = newNode -> next;
+            tempNode = tempNode -> next;
+        }
+        if(tempNode -> data == element){
+            newNode -> next = tempNode -> next;
+            printf("\n Deleted Element is: %d. \n",tempNode -> data);
+            free(tempNode);
+            printf("\n Elements after Deleting After a Element is: ");
+            display();
+            printf("\n");
+        }
+    }
+}
+
+void search(int element){
+    struct node *search;
+    int loc = 0 , flag;
+
+    search = head;
+
+    if(search == NULL){
+        printf("\n General Linked List is Empty. \n");
+    }
+    else{
+        while (search != NULL)
+        {
+            if(search -> data == element){
+                printf("\n Element found at Location number %d. \n",loc+1);
+                return;
+            }
+            loc++;
+            search = search -> next;
+        }
+        
+    }
+    if(search == NULL){
+        printf("\n Element Not found. \n");
     }
 }
 
@@ -111,12 +213,31 @@ int main(){
 
                 insertAfter(val,element);
                 break;
+            case 4:
+                deleteFromFront();
+                break;
+            case 5:
+                deleteFromEnd();
+                break;
+            case 6:
+                printf("\n Enter a Element from which you wanna delete after: ");
+                scanf("%d",&element);
+
+                deleteAfter(element);
+                break;
+            case 7:
+                printf("\n Enter a Element you wanna search: ");
+                scanf("%d",&element);
+
+                search(element);
+                break;
+            case 8:
+                break;
             default:
                 printf("\n Invalid Option. \n");
                 break;
         }
 
     }while(ch != 8);
-    display();
     return 0;
 }
