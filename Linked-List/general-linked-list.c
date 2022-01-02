@@ -110,7 +110,10 @@ int main(){
                 scanf("%d",&element);
 
                 insertAfter(val,element);
-                // break;
+                break;
+            default:
+                printf("\n Invalid Option. \n");
+                break;
         }
 
     }while(ch != 8);
